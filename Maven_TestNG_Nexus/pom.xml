@@ -52,7 +52,7 @@
 			          	</suiteXmlFiles>
 				    </configuration>
 		  		</plugin>
-		  </plugins>
-  	</pluginManagement>
-  </build>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
