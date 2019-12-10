@@ -1,0 +1,8 @@
+
+pipeline {
+    stages {
+        stage ('Initialization') {
+            echo 'Test Print'
+        }
+    }
+}
