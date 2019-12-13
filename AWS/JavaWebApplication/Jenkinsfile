@@ -2,7 +2,7 @@
 pipeline {
     stages {
         stage ('Initialization') {
-            step {
+            steps {
                 echo 'Test Print'
             }
         }
