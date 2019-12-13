@@ -15,8 +15,10 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                sh "ls -latr"
-                sh "mvn clean install"
+                dir ("${WORKSPACE}/AWS/JavaWebApplication/") {
+                    sh "ls -latr"
+                    sh "mvn clean install"
+                }
             }
         }
     }
