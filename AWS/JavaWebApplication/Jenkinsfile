@@ -7,7 +7,12 @@ pipeline {
     stages {
         stage ('Initialization') {
             steps {
-                echo 'Test Print'
+                echo 'Initialization'
+            }
+        }
+        stage ('Build') {
+            steps {
+                mvn clean install
             }
         }
     }
