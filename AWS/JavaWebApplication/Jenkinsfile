@@ -4,6 +4,9 @@ pipeline {
     tools {
         maven 'maven_3.6.3'
     }
+    options { 
+        buildDiscarder(logRotator(numToKeepStr: '3')) 
+    }
     stages {
         stage ('Initialization') {
             steps {
@@ -12,7 +15,7 @@ pipeline {
         }
         stage ('Build') {
             steps {
-                mvn clean install
+                sh "mvn clean install"
             }
         }
     }
