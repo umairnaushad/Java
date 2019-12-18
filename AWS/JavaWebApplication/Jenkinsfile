@@ -1,5 +1,6 @@
 def deploymentType
 def branchName
+def nexusUser
 
 pipeline {
     agent any
@@ -14,6 +15,7 @@ pipeline {
             steps {
                 script {
                     branchName      = env.BRANCH_NAME.toLowerCase()
+                    nexusUser       = 'admin'
                     if( branchName == 'master') {
                         deploymentType = 'qmg'
                     }
