@@ -1,5 +1,6 @@
 def deploymentType
 def branchName
+def nexusServer
 def nexusUser
 
 pipeline {
@@ -15,6 +16,7 @@ pipeline {
             steps {
                 script {
                     branchName      = env.BRANCH_NAME.toLowerCase()
+                    nexusServer     = 'http://ec2-3-17-184-43.us-east-2.compute.amazonaws.com:8081/'
                     nexusUser       = 'admin'
                     if( branchName == 'master') {
                         deploymentType = 'qmg'
