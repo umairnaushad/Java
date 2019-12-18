@@ -1,3 +1,5 @@
+def deploymentType
+def branchName
 
 pipeline {
     agent any
@@ -11,6 +13,10 @@ pipeline {
         stage ('Initialization') {
             steps {
                 echo 'Initialization'
+                branchName      = env.BRANCH_NAME.toLowerCase()
+                if( branchName == 'master') {
+                    deploymentType = 'qmg'
+                }                
             }
         }
         stage ('Build') {
@@ -19,6 +25,13 @@ pipeline {
                     sh "ls -latr"
                     sh "mvn clean install"
                 }
+            }
+        }
+        stage ('Upload Artifatcs') {
+            steps {
+                def nexusArtifactId     = deploymentType + '-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
+                def artifactToUpload    = 'JavaWebApplication_JSP##1.0.5.zip'
+                nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Db'
             }
         }
     }
