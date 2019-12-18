@@ -41,7 +41,7 @@ pipeline {
                     def nexusArtifactId     = deploymentType + '-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
                     def artifactToUpload    = 'JavaWebApplication_JSP##1.0.5.zip'
                     sh "ls -latr"
-                    nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Db'
+                    //nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Db'
                 }
             }
         }
