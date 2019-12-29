@@ -52,7 +52,7 @@ pipeline {
                             repository: 'RepositoryName',
                             credentialsId: nexusUser,
                             artifacts: [
-                                [artifactId: projectName,
+                                [artifactId: nexusArtifactId,
                                 classifier: '',
                                 file: 'JavaWebApplication_JSP##1.0.5.war',
                                 type: 'jar']
