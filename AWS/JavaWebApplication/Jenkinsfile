@@ -16,14 +16,14 @@ pipeline {
             steps {
                 script {
                     branchName      = env.BRANCH_NAME.toLowerCase()
-                    nexusServer     = 'ec2-18-191-173-191.us-east-2.compute.amazonaws.com:8081/'
+                    nexusServer     = 'ec2-18-191-173-191.us-east-2.compute.amazonaws.com:8081/nexus'
                     nexusUser       = 'admin'
                     //nexusLink     = "http://${nexusServer}#browse/browse:maven-releases:com/emaratech/iqcs/${nexusArtifactId}"
                     if( branchName == 'master') {
                         deploymentType = 'qmg'
                     }
 
-                    echo "deploymentType: ${deploymentType}, branchName: ${branchName}"
+                    echo "deploymentType: ${deploymentType}, branchName: ${branchName}, nexusServer: ${nexusServer}, nexusUser:${nexusUser}"
                 }         
             }
         }
@@ -40,9 +40,10 @@ pipeline {
                 script {
                     def nexusArtifactId     = deploymentType + '-' + env.BRANCH_NAME + '-' + env.BUILD_NUMBER
                     def artifactToUpload    = 'JavaWebApplication_JSP##1.0.5.war'
+                    echo "nexusArtifactId: ${nexusArtifactId}, artifactToUpload: ${artifactToUpload}"
                     dir ("${WORKSPACE}/AWS/JavaWebApplication/target/") {
                         sh "ls -latr"
-                        nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Db'
+                        nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Application'
                     }
                 }
             }
