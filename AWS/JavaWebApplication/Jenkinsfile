@@ -44,7 +44,7 @@ pipeline {
                     echo "nexusArtifactId: ${nexusArtifactId}, artifactToUpload: ${artifactToUpload}"
                     //dir ("${WORKSPACE}/AWS/JavaWebApplication/target/") {
                         sh "ls -latr"
-                        nexusArtifactUploader(
+                        /*nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
                             nexusUrl: nexusServer,
@@ -58,7 +58,8 @@ pipeline {
                                 file: 'test.zip',
                                 type: 'zip']
                             ]
-                        )
+                        )*/
+                        nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: 'test.zip', type: 'zip']], credentialsId: nexusUser, groupId: 'com.example', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'v1'
                         //nexusArtifactUploader artifacts: [[artifactId: nexusArtifactId, classifier: '', file: artifactToUpload, type: 'zip']], credentialsId: nexusUser , groupId: 'org.umair.java', nexusUrl: nexusServer, nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'Pipeline-Application'
                     //}
                 }
